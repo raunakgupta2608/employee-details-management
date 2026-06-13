@@ -8,35 +8,29 @@ type DashboardStatsProps = {
 };
 
 function DashboardStats({ stats }: DashboardStatsProps) {
-  const { totalEmployees, activeEmployees, avgSalary } = stats;
+  const { totalEmployees, activeEmployees, avgSalary, avgPerformance } = stats;
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3,1fr)",
-        gap: 16,
-      }}
-    >
+    <section className="stats-grid">
       <Card title="Employees" value={totalEmployees} />
       <Card title="Active" value={activeEmployees} />
       <Card title="Avg Salary" value={`$${avgSalary.toLocaleString()}`} />
-    </div>
+      <Card title="Avg Performance" value={avgPerformance} />
+    </section>
   );
 }
 
-function Card({ title, value }: any) {
+type CardProps = {
+  title: string;
+  value: number | string;
+};
+
+function Card({ title, value }: CardProps) {
   return (
-    <div
-      style={{
-        padding: 20,
-        background: "white",
-        borderRadius: 12,
-      }}
-    >
+    <article className="stat-card">
       <h4>{title}</h4>
       <h2>{value}</h2>
-    </div>
+    </article>
   );
 }
 

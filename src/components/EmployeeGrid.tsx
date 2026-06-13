@@ -5,23 +5,27 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { columnDefs, defaultColDef } from "../utils/gridConfig";
 
-export default function EmployeeGrid({ data }: any) {
+function EmployeeGrid({ data }: any) {
   const [quickFilter, setQuickFilter] = useState("");
 
   return (
-    <>
-      <input
-        placeholder="Search..."
-        value={quickFilter}
-        onChange={(e) => setQuickFilter(e.target.value)}
-      />
+    <section className="grid-panel">
+      <div className="grid-toolbar">
+        <div>
+          <p className="eyebrow">Directory</p>
+          <h2>Employee Records</h2>
+        </div>
+
+        <input
+          className="search-input"
+          placeholder="Search employees"
+          value={quickFilter}
+          onChange={(e) => setQuickFilter(e.target.value)}
+        />
+      </div>
 
       <div
-        className="ag-theme-quartz"
-        style={{
-          height: 600,
-          marginTop: 20,
-        }}
+        className="ag-theme-quartz-dark employee-grid"
       >
         <AgGridReact
           rowData={data}
@@ -38,6 +42,8 @@ export default function EmployeeGrid({ data }: any) {
           modules={[ClientSideRowModelModule]}
         />
       </div>
-    </>
+    </section>
   );
 }
+
+export default EmployeeGrid;

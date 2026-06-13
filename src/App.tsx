@@ -3,52 +3,52 @@ import DashboardStats from "./components/DashboardStats";
 import EmployeeGrid from "./components/EmployeeGrid";
 
 import { useEmployees } from "./hooks/useEmployees";
+import type { EmployeeData } from "./types/EmployeeType";
+
+const employeeData = data as EmployeeData;
 
 function App() {
-  const { employees, stats, departmentData } = useEmployees(data.employees);
+  const { employees, stats, departmentData } = useEmployees(
+    employeeData.employees,
+  );
   const maxDepartmentCount = Math.max(
     ...departmentData.map((department) => department.value),
   );
 
   return (
-    <>
+    <main className="app-shell">
+      <header className="app-header">
+        <div>
+          <p className="eyebrow">Employee Management</p>
+          <h1>Workforce Dashboard</h1>
+        </div>
+        <span className="status-pill">{stats.activeEmployees} active</span>
+      </header>
+
       <DashboardStats stats={stats} />
 
-      <section style={{ marginTop: 24 }}>
-        <h3>Departments</h3>
+      <section className="department-panel">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Teams</p>
+            <h2>Department Breakdown</h2>
+          </div>
+          <span>{departmentData.length} departments</span>
+        </div>
 
-        <div
-          style={{
-            display: "grid",
-            gap: 12,
-          }}
-        >
+        <div className="department-list">
           {departmentData.map((department) => (
-            <div key={department.name}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: 6,
-                }}
-              >
+            <div className="department-row" key={department.name}>
+              <div className="department-meta">
                 <span>{department.name}</span>
                 <strong>{department.value}</strong>
               </div>
 
-              <div
-                style={{
-                  height: 8,
-                  background: "#e5e7eb",
-                  borderRadius: 4,
-                  overflow: "hidden",
-                }}
-              >
+              <div className="department-track">
                 <div
+                  className="department-fill"
                   style={{
                     width: `${(department.value / maxDepartmentCount) * 100}%`,
-                    height: "100%",
-                    background: "#2563eb",
                   }}
                 />
               </div>
@@ -58,7 +58,7 @@ function App() {
       </section>
 
       <EmployeeGrid data={employees} />
-    </>
+    </main>
   );
 }
 

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
+import type { Employee } from "../types/EmployeeType";
 
-export function useEmployees(employees: any[]) {
+export function useEmployees(employees: Employee[]) {
   const stats = useMemo(() => {
     const totalEmployees = employees.length;
 

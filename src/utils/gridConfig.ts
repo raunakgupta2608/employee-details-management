@@ -50,7 +50,8 @@ export const columnDefs: ColDef[] = [
   },
   {
     field: "isActive",
-    cellRenderer: (params: ICellRendererParams) => (params.value ? "🟢" : "🔴"),
+    cellRenderer: (params: ICellRendererParams) =>
+      params.value ? "Active" : "Inactive",
   },
   {
     field: "skills",
