@@ -12,10 +12,14 @@ function DashboardStats({ stats }: DashboardStatsProps) {
 
   return (
     <section className="stats-grid">
-      <Card title="Employees" value={totalEmployees} />
-      <Card title="Active" value={activeEmployees} />
-      <Card title="Avg Salary" value={`$${avgSalary.toLocaleString()}`} />
-      <Card title="Avg Performance" value={avgPerformance} />
+      <Card title="Employees" value={totalEmployees} icon={"👥"} />
+      <Card title="Active" value={activeEmployees} icon={"🟢"} />
+      <Card
+        title="Avg Salary"
+        value={`$${avgSalary.toLocaleString()}`}
+        icon={"💰"}
+      />
+      <Card title="Avg Performance" value={avgPerformance} icon={"⭐"} />
     </section>
   );
 }
@@ -23,12 +27,15 @@ function DashboardStats({ stats }: DashboardStatsProps) {
 type CardProps = {
   title: string;
   value: number | string;
+  icon?: any;
 };
 
-function Card({ title, value }: CardProps) {
+function Card({ title, value, icon }: CardProps) {
   return (
     <article className="stat-card">
-      <h4>{title}</h4>
+      <h4>
+        <i>{icon}</i> {title}
+      </h4>
       <h2>{value}</h2>
     </article>
   );
